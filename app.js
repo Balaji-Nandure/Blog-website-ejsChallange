@@ -15,6 +15,8 @@ const contactContent =
 
 // let post = {};
 
+const posts = [];
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -24,6 +26,7 @@ app.use(express.static("public"));
 
 app.get("/", (req, res) => {
     res.render("home", { startingContent: homeStartingContent });
+    console.log(posts);
 });
 
 app.get("/about", (req, res) => {
@@ -41,7 +44,11 @@ app.get("/compose", (req, res) => {
 app.post("/compose", (req, res) => {
     // console.log(req.body.postBody);
     const post = { title: req.body.postTitle, body: req.body.postBody };
-    // console.log(post);
+
+    posts.push(post);
+
+    res.redirect("/");
+    // console.log(posts);
 });
 
 app.listen(3000, function () {
